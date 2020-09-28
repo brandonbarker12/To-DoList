@@ -49,5 +49,5 @@ app.post('/removetask', function(req, res){
 
 //server setup
 app.listen(3000, function(){
-    console.log('Listening!')
+    console.log('Listening...')
 });
