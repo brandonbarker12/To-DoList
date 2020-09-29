@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 //create express object, call express
 var app = express();
 
+//get port info
+const port = process.env.PORT || 3000;
+
 //tells app to use ejs for templates
 app.set('view engine', 'ejs');
 
@@ -48,6 +51,6 @@ app.post('/removetask', function(req, res){
 });
 
 //server setup
-app.listen(3000, function(){
-    console.log('Listening...')
+app.listen(port, function(){
+    console.log('Listening on ' + port)
 });
