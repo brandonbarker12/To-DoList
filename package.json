@@ -4,6 +4,7 @@
   "description": "todo-app",
   "main": "index.js",
   "scripts": {
+      "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,6 +17,9 @@
     "url": "https://github.com/brandonbarker12/NodeJs_Intro/issues"
   },
   "homepage": "https://github.com/brandonbarker12/NodeJs_Intro#readme",
+  "engines": {
+      "node": "12.x"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^3.1.5",
