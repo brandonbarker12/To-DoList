@@ -5,23 +5,22 @@
         <link href="css/styles.css" rel="stylesheet">
     </head>
     <body>
-    <div class="container">
-        <h1> We have a To-Do List </h1>
-        <form action ="/addtask" method="POST">
-            <input type="text" name="newtask" placeholder="Add new task">
-            <button> Add to Tasks </button>
-            <h2> Tasks: </h2>
-            <% for( var i=0; i < tasks.length; i++){ %>
-                <li><input type="checkbox" name="check" value="<%= tasks[i] %>" /><%= tasks[i] %></li>
-            <% } %>
+        <div class="container">
+            <h1> We have a To-Do List </h1>
+            <form action ="/addtask" method="POST">
+                <input type="text" name="newtask" placeholder="Add new task">
+                <button> Add to Tasks </button>
+                <h2> Tasks: </h2>
+                <% for( var i=0; i < tasks.length; i++){ %>
+                    <li><input type="checkbox" name="check" value="<%= tasks[i] %>" /><%= tasks[i] %></li>
+                <% } %>
+
+                <button formaction="/removetask" type="submit"> Remove Task </button>
+            </form>
+                <h3> Completed tasks: </h3>
 
 
-
-            <button formaction="/removetask" type="submit"> Remove Task </button>
-        </form>
-        <h3> Completed tasks: </h3>
-        
-
-    </div>
+                
+        </div>
     </body>
 </html>

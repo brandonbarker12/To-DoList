@@ -14,6 +14,7 @@ h1 {
 
 h2 {
     margin-top: -2px;
+    margin-bottom: -1px;
     text-shadow: 2px 2px 8px black;
     color: white;
 }
