@@ -6,18 +6,20 @@
     </head>
     <body>
     <div class="container">
-        <h2> We have a to-do list </h2>
+        <h1> We have a To-Do List </h1>
         <form action ="/addtask" method="POST">
-            <input type="text" name="newtask" placeholder="add new task">
-            <button> Add a Task </button>
-            <h2> Tasks </h2>
+            <input type="text" name="newtask" placeholder="Add new task">
+            <button> Add to Tasks </button>
+            <h2> Tasks: </h2>
             <% for( var i=0; i < tasks.length; i++){ %>
                 <li><input type="checkbox" name="check" value="<%= tasks[i] %>" /><%= tasks[i] %></li>
             <% } %>
+
+
+
             <button formaction="/removetask" type="submit"> Remove Task </button>
         </form>
-        <h2> Completed tasks </h2>
-
+        <h3> Completed tasks: </h3>
         
 
     </div>

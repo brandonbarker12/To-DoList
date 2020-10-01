@@ -1,6 +1,34 @@
 body {
   background: linear-gradient(#51E2F5, #9DF9EF, #EDF7F7, #FFA8B6, #A28089);
-  color: #2D3047;
+  font-family: 'Marker Felt', fantasy;
+  color: black;
   margin-top: 20px;
   text-align: center;
+}
+
+h1 {
+    font-size: 40px;
+    color: white;
+    text-shadow: 2px 2px 8px black;
+}
+
+h2 {
+    margin-top: -2px;
+    text-shadow: 2px 2px 8px black;
+    color: white;
+}
+
+input {
+    padding-top: -2px;
+    padding-bottom: -2px;
+}
+
+.container {
+    line-height: 2em;
+}
+
+button {
+    background: transparent;
+    border-radius: 6px;
+    border: 1px solid black;
 }
