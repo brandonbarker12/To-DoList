@@ -33,3 +33,14 @@ button {
     border-radius: 6px;
     border: 1px solid black;
 }
+
+.pic {
+    position: relative;
+    padding-top: 500px;
+}
+
+img {
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
+}
