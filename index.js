@@ -43,8 +43,12 @@ app.get('/', function(req, res){
         if(err){
             console.log(err);
         }else{
+            tasks = [];
+            completed = [];
+            id = [];
             for(i = 0; i< todo.length; i++){
                 if(todo[i].done){
+                    console.log(todo[i]._id)
                     completed.push(todo[i].item)
                 }else{
                     tasks.push(todo[i].item)
@@ -58,10 +62,18 @@ app.get('/', function(req, res){
 
 //add post method /addtask
 app.post('/addtask', function(req, res){
-    var newTask = req.body.newtask;
-    tasks.push(newTask);
-    //return index
-    res.redirect('/');
+    let newTodo = new Todo({
+        item: req.body.newtask,
+        done: false
+    })
+    newTodo.save(function(err, todo){
+        if (err){
+            console.log(err)
+        } else {
+            //return index
+            res.redirect('/');
+        }
+    });
 });
 
 //remove post method /removetask
@@ -69,8 +81,12 @@ app.post('/removetask', function(req, res){
     var removeTask = req.body.check;
     //push to completed
     if(typeof removeTask === 'string'){
-        tasks.splice(tasks.indexOf(removeTask), 1);
-        completed.push(removeTask);
+        Todo.updateOne({_id: removeTask}, {done:true}, function(err){
+            if(err){
+                console.log(err);
+            }
+        })
+        //tasks.splice(tasks.indexOf(removeTask), 1);
     }else if(typeof removeTask === 'object'){
         for (var i = 0; i < removeTask.length; i++){
             tasks.splice(tasks.indexOf(removeTask[i]), 1);
