@@ -1,24 +1,18 @@
 //require express
 var express = require('express');
-
 //require body-parser
 var bodyParser = require('body-parser');
-
 // require mongoos
 var mongoose = require("mongoose");
-
 //create express object, call express
 var app = express();
-
 //get port info
 const port = process.env.PORT || 3000;
 
 //tells app to use ejs for templates
 app.set('view engine', 'ejs');
-
 //make styles public
 app.use(express.static("public"));
-
 //tell app to use body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -32,7 +26,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 //couple of items todo
 var tasks = [];
-
 //completed items
 var completed = [];
 
@@ -45,13 +38,11 @@ app.get('/', function(req, res){
         }else{
             tasks = [];
             completed = [];
-            id = [];
             for(i = 0; i< todo.length; i++){
                 if(todo[i].done){
-                    console.log(todo[i]._id)
                     completed.push(todo[i].item)
                 }else{
-                    tasks.push(todo[i].item)
+                    tasks.push(todo[i])
                 }
             }
         }
@@ -78,24 +69,30 @@ app.post('/addtask', function(req, res){
 
 //remove post method /removetask
 app.post('/removetask', function(req, res){
-    var removeTask = req.body.check;
-    //push to completed
-    if(typeof removeTask === 'string'){
-        Todo.updateOne({_id: removeTask}, {done:true}, function(err){
-            if(err){
-                console.log(err);
-            }
-        })
-        //tasks.splice(tasks.indexOf(removeTask), 1);
-    }else if(typeof removeTask === 'object'){
-        for (var i = 0; i < removeTask.length; i++){
-            tasks.splice(tasks.indexOf(removeTask[i]), 1);
-            completed.push(removeTask[i]);
-        }
-    }
-    
-    res.redirect('/');
-});
+    var id = req.body.check;
+     if(typeof id === 'string'){
+         Todo.updateOne({_id: id},{done:true},function(err){
+             if(err){
+                 console.log(err)
+             }
+         })
+     }else if(typeof id === 'object'){
+         for (var i = 0; i < id.length; i++){
+             Todo.updateOne({_id: id[i]},{done:true},function(err){
+                 if(err){
+                     console.log(err)
+                 }
+             })
+         }
+     }
+     res.redirect('/');
+ });
+
+ app.post('/deleteTodo', function(){
+     // write the function for delete using ID
+     // handle for single and multiple delete requests (req.body.delete)
+     // Todo.deleteOne(id, function(err){})
+ })
 
 //server setup
 app.listen(port, function(){

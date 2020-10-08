@@ -12,15 +12,19 @@
                 <button> Add to Tasks </button>
                 <h2> Tasks: </h2>
                 <% for( var i=0; i < tasks.length; i++){ %>
-                    <li><input type="checkbox" name="check" value="<%= tasks[i] %>" /><%= tasks[i] %></li>
+                    <li><input type="checkbox" name="check" value="<%= tasks[i]._id %>" /><%= tasks[i].item %></li>
                 <% } %>
 
                 <button formaction="/removetask" type="submit"> Remove Task </button>
             </form>
+
+            <form action ="/deleteTodo" method="POST">
                 <h3> Completed tasks: </h3>
-            <% for( var i=0; i < completed.length; i++){ %>
-                    <li><%= completed[i] %></li>
-            <% } %>                
+                    <% for(var i = 0; i < completed.length; i++){ %>
+                        <li><input type="checkbox" name="delete" value="<%= completed[i] %>" /><%= completed[i] %></li>
+                    <% } %>
+                <button formaction="/deleteTodo" type="submit"> Delete </button>
+            </form>                
         </div>
         
         <div class="pic">
