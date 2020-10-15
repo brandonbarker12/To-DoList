@@ -1,24 +1,26 @@
 //require express
 var express = require('express');
-//require body-parser
+//reqiure body parser
 var bodyParser = require('body-parser');
-// require mongoos
-var mongoose = require("mongoose");
+//Require mongoose
+var mongoose = require('mongoose');
+//Require node fetch
+var fetch = require('node-fetch');
 //create express object, call express
 var app = express();
 //get port info
 const port = process.env.PORT || 3000;
-
-//tells app to use ejs for templates
+//tell app to use EJS for templates
 app.set('view engine', 'ejs');
-//make styles public
+//Make styles public
 app.use(express.static("public"));
-//tell app to use body-parser
-app.use(bodyParser.urlencoded({extended: true}));
+//tell app to use Body parser
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Connection Information for Mongo
 const Todo = require('./models/todo.model');
 const mongoDB =  'mongodb+srv://BBarker12:pEntEOIzud4MgLgK@cluster0.4pbhi.mongodb.net/todolist?retryWrites=true&w=majority'
+//Changes database
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
@@ -40,9 +42,9 @@ app.get('/', function(req, res){
             completed = [];
             for(i = 0; i< todo.length; i++){
                 if(todo[i].done){
-                    completed.push(todo[i].item)
+                    completed.push(todo[i]);
                 }else{
-                    tasks.push(todo[i])
+                    tasks.push(todo[i]);
                 }
             }
         }
@@ -75,6 +77,7 @@ app.post('/removetask', function(req, res){
              if(err){
                  console.log(err)
              }
+             res.redirect('/');
          })
      }else if(typeof id === 'object'){
          for (var i = 0; i < id.length; i++){
@@ -82,17 +85,54 @@ app.post('/removetask', function(req, res){
                  if(err){
                      console.log(err)
                  }
+                 res.redirect('/');
              })
          }
      }
-     res.redirect('/');
  });
 
- app.post('/deleteTodo', function(){
-     // write the function for delete using ID
-     // handle for single and multiple delete requests (req.body.delete)
-     // Todo.deleteOne(id, function(err){})
- })
+ app.post('/deleteTodo', function(req, res){
+    var id = req.body.delete;
+    if(typeof id === "string"){
+        Todo.deleteOne({_id: id}, function(err){
+            if (err){
+               console.log(err)
+            }
+        });
+    }else if (typeof id === "object"){
+        for(var i = 0; i < id.length; i++){
+            Todo.deleteOne({_id: id[i]}, function(err){
+            if (err){
+                console.log(err)
+            }
+        });
+        }
+    }
+    res.redirect('/');
+})
+
+//fetch nasa information and send to front end as JSON data
+app.get('/nasa', function(req, res){
+    let nasaData;
+    fetch('https://api.nasa.gov/planetary/apod?api_key=aQTsPLj3WTSHC79fuJjFwqZlvr8WtPRTGtN0VFCc')
+    .then(res => res.json())
+    .then(data => {
+        nasaData = data;
+        res.json(nasaData);
+    });
+})
+
+//get our data for the todo list from Mongo and send to front end as JSON
+app.get('/todoListJson', function(req, res){
+    //query to mongoDB for todos
+    Todo.find(function(err, todo){
+        if(err){
+            console.log(err);
+        }else{
+            res.json(todo);
+        }
+    });
+});
 
 //server setup
 app.listen(port, function(){

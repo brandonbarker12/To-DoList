@@ -14,7 +14,6 @@
                 <% for( var i=0; i < tasks.length; i++){ %>
                     <li><input type="checkbox" name="check" value="<%= tasks[i]._id %>" /><%= tasks[i].item %></li>
                 <% } %>
-
                 <button formaction="/removetask" type="submit"> Remove Task </button>
             </form>
 
