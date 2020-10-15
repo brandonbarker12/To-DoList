@@ -111,28 +111,23 @@ app.post('/removetask', function(req, res){
     res.redirect('/');
 })
 
-//fetch nasa information and send to front end as JSON data
 app.get('/nasa', function(req, res){
-    let nasaData;
     fetch('https://api.nasa.gov/planetary/apod?api_key=aQTsPLj3WTSHC79fuJjFwqZlvr8WtPRTGtN0VFCc')
     .then(res => res.json())
     .then(data => {
-        nasaData = data;
-        res.json(nasaData);
+        res.render('nasa',{data:data});
     });
 })
 
-//get our data for the todo list from Mongo and send to front end as JSON
-app.get('/todoListJson', function(req, res){
-    //query to mongoDB for todos
-    Todo.find(function(err, todo){
-        if(err){
-            console.log(err);
-        }else{
-            res.json(todo);
-        }
+app.get('/nasaDate', function(req, res){
+    //wrote logic for random date
+    let date = '2019-12-16'
+    fetch('https://api.nasa.gov/planetary/apod?api_key=aQTsPLj3WTSHC79fuJjFwqZlvr8WtPRTGtN0VFCc&date=' + date)
+    .then(res => res.json())
+    .then(data => {
+        res.render('nasaRandom', {data: data})
     });
-});
+})
 
 //server setup
 app.listen(port, function(){
