@@ -1,25 +1,47 @@
+@font-face {font-family: 'cyberpnk'; 
+src: url('Cyberfunk-RGyM.ttf')format('truetype');}
+
 body {
-  background: linear-gradient(#51E2F5, #9DF9EF, #EDF7F7, #FFA8B6, #A28089);
-  font-family: 'Marker Felt', fantasy;
-  color: black;
-  margin-top: 20px;
-  text-align: center;
+    background-image: url("cyberpunk.gif");
+    background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+    color: white;
+    margin-top: 20px;
+    font-family: "cyberpnk";
+    text-align: center;
 }
 
 h1 {
-    font-size: 40px;
-    color: white;
-    text-shadow: 2px 2px 8px black;
+    font-size: 3.5em;
+    color: black;
+    text-shadow: -1px 0px 3px #00FFFF, 3px 0px 3px #F13CF2;
+	letter-spacing: 2px;
+    padding-top: 10px;
 }
 
 h2 {
-    margin-top: -2px;
+    margin-top: 20px;
+    font-size: 3em;
     margin-bottom: -1px;
-    text-shadow: 2px 2px 8px black;
-    color: white;
+    color: black;
+    text-shadow: -1px 0px 3px #00FFFF, 3px 0px 3px #F13CF2;
+}
+
+h3 {
+    font-size: 2.5em;
+    color: black;
+    text-shadow: -1px 0px 3px #00FFFF, 3px 0px 3px #F13CF2;
+    margin-bottom: -3px;
 }
 
 input {
+    font-size: .8em;
+    color: white;
+    letter-spacing: 1px;
+    text-shadow: -1px 0px 3px #00FFFF, 3px 0px 3px #F13CF2;
+    background: transparent;
     padding-top: -2px;
     padding-bottom: -2px;
 }
@@ -28,19 +50,12 @@ input {
     line-height: 2em;
 }
 
+li {
+    list-style: none;
+}
+
 button {
     background: transparent;
     border-radius: 6px;
     border: 1px solid black;
-}
-
-.pic {
-    position: relative;
-    padding-top: 500px;
-}
-
-img {
-  bottom: 0px;
-  left: 0px;
-  position: absolute;
 }
