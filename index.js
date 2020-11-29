@@ -111,24 +111,6 @@ app.post('/removetask', function(req, res){
     res.redirect('/');
 })
 
-app.get('/nasa', function(req, res){
-    fetch('https://api.nasa.gov/planetary/apod?api_key=aQTsPLj3WTSHC79fuJjFwqZlvr8WtPRTGtN0VFCc')
-    .then(res => res.json())
-    .then(data => {
-        res.render('nasa',{data:data});
-    });
-})
-
-app.get('/nasaDate', function(req, res){
-    //wrote logic for random date
-    let date = '2019-12-16'
-    fetch('https://api.nasa.gov/planetary/apod?api_key=aQTsPLj3WTSHC79fuJjFwqZlvr8WtPRTGtN0VFCc&date=' + date)
-    .then(res => res.json())
-    .then(data => {
-        res.render('nasaRandom', {data: data})
-    });
-})
-
 //server setup
 app.listen(port, function(){
     console.log('Listening on ' + port)
